@@ -87,11 +87,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentatio
                </div>
                
                {/* Theme Toggle Bar */}
-               <div className="flex items-center gap-1 self-end mt-1 mr-3">
+               <div className="flex items-center gap-1 self-end mt-1 mr-7">
                  <Sun className="w-4 h-4 text-[var(--color-ink)]" />
                  <button
                    onClick={toggleTheme}
-                   className="w-12 h-12 flex items-center justify-center cursor-pointer group"
+                   className="w-12 h-12 flex items-center justify-center cursor-pointer group touch-manipulation"
                    aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                  >
                    <div className="w-8 h-4 border border-[var(--color-ink)] rounded-[2px] relative flex items-center transition-opacity group-hover:opacity-80">

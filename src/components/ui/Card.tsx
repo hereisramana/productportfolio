@@ -34,18 +34,10 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
     };
   }, []);
 
-  const handleBlur = (e: React.FocusEvent) => {
-    // Check if the new focus is outside the component
-    if (!e.currentTarget.contains(e.relatedTarget)) {
-      setIsFlipped(false);
-    }
-  };
-
   return (
     <div 
       ref={cardRef}
       className="group relative h-full perspective-1000"
-      onBlur={handleBlur}
     >
       <div 
         className="relative w-full aspect-square transition-all duration-500 transform-style-3d"

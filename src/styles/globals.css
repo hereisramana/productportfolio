@@ -68,7 +68,7 @@ body {
   line-height: 1.5; 
   overflow-x: hidden;
   position: relative;
-  transition: background-color 0.3s var(--ease-soft), color 0.3s var(--ease-soft);
+  /* Removed transition to fix mobile lag during theme switch */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -94,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Interaction: Soft Glow/Shift instead of Invert */
 .hover-soft {
-  transition: background-color 0.2s var(--ease-soft), color 0.2s var(--ease-soft);
+  /* Removed transition to fix mobile lag */
 }
 .hover-soft:hover {
   background-color: var(--color-paper-dim);
