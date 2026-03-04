@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Project } from '../../types';
 
 interface ProjectGridTileProps {
@@ -14,16 +14,12 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Only apply this logic on mobile/touch devices if needed, 
-        // but applying generally provides a nice scroll effect.
-        // We'll check if it's a touch device or small screen to be specific if requested,
-        // but "on mobile" usually implies the context where hover doesn't exist.
         if (window.matchMedia('(max-width: 768px)').matches) {
             setIsInView(entry.isIntersecting);
         }
       },
       {
-        threshold: 0.6, // 60% visibility required to be "in focus"
+        threshold: 0.6,
       }
     );
 
@@ -38,43 +34,49 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
     };
   }, []);
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setIsFlipped(!isFlipped);
+  const handleBlur = (e: React.FocusEvent) => {
+    // Check if the new focus is outside the component
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsFlipped(false);
     }
   };
 
   return (
     <div 
       ref={cardRef}
-      className="group relative h-full perspective-1000 cursor-pointer focus:outline-none"
-      role="button"
-      tabIndex={0}
-      aria-label={`View details for ${project.title}`}
-      onClick={() => setIsFlipped(!isFlipped)}
-      onKeyDown={handleKeyDown}
+      className="group relative h-full perspective-1000"
+      onBlur={handleBlur}
     >
       <div 
         className="relative w-full aspect-square transition-all duration-500 transform-style-3d"
         style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         
-        {/* Front Face */}
-        <div className="absolute inset-0 backface-hidden rounded-[var(--radius-md)] overflow-hidden shadow-sm bg-[var(--color-paper-static-light)] group-hover:ring-2 group-hover:ring-[#2B6B7C] group-focus:ring-2 group-focus:ring-[#2B6B7C] transition-all duration-300">
+        {/* Front Face - Interactive Trigger */}
+        <button
+          onClick={() => setIsFlipped(true)}
+          className="absolute inset-0 w-full h-full p-0 border-0 text-left cursor-pointer backface-hidden rounded-[var(--radius-md)] overflow-hidden shadow-sm bg-[var(--color-paper-static-light)] group-hover:ring-2 group-hover:ring-[#2B6B7C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2B6B7C] transition-all duration-300"
+          aria-hidden={isFlipped}
+          tabIndex={isFlipped ? -1 : 0}
+          aria-label={`View details for ${project.title}`}
+        >
           <img 
             src={project.thumbnailUrl} 
             alt="" 
             className={`w-full h-full object-cover image-technical ${isInView ? 'in-view' : ''}`}
             loading="lazy"
           />
-        </div>
+        </button>
 
         {/* Back Face */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-md)] bg-[var(--color-paper-dim)] p-6 flex flex-col justify-between shadow-sm border border-[var(--color-paper-dark)]/30 group-hover:ring-2 group-hover:ring-[#2B6B7C] group-focus:ring-2 group-focus:ring-[#2B6B7C] transition-all duration-300">
+        <div 
+          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-md)] bg-[var(--color-paper-dim)] p-6 flex flex-col justify-between shadow-sm border border-[var(--color-paper-dark)]/30 group-hover:ring-2 group-hover:ring-[#2B6B7C] transition-all duration-300 cursor-pointer"
+          aria-hidden={!isFlipped}
+          onClick={() => setIsFlipped(false)}
+        >
            
            {/* Header / Metrics */}
-           <div>
+           <div className="mt-2">
               <div className="flex justify-between items-start mb-3">
                 <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-ink-subtle)]">{project.role}</p>
                 <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-ink-subtle)]">{project.duration}</p>
@@ -91,7 +93,7 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
                   onNavigate(project.id);
                 }}
                 tabIndex={isFlipped ? 0 : -1}
-                className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] active:scale-95 transition-all cursor-pointer"
+                className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] active:scale-95 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2B6B7C]"
               >
                  Case Study
               </button>
@@ -103,7 +105,7 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()} 
                   tabIndex={isFlipped ? 0 : -1}
-                  className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[#2B6B7C] text-[#2B6B7C] rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[#2B6B7C] hover:text-white active:bg-[#2B6B7C] active:text-white active:scale-95 transition-all cursor-pointer"
+                  className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[#2B6B7C] text-[#2B6B7C] rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[#2B6B7C] hover:text-white active:bg-[#2B6B7C] active:text-white active:scale-95 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2B6B7C]"
                 >
                   Prototype
                 </a>
@@ -123,3 +125,4 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
     </div>
   );
 };
+

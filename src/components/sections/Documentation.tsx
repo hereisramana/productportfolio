@@ -16,7 +16,7 @@ export const Documentation: React.FC<DocumentationProps> = ({ onBack }) => {
   const technical = "Uses the browser's native History API to manage view states, allowing for deep-linking and back-button navigation without a heavy router library. Built mobile-first with a unified component architecture that adapts to viewport constraints without code duplication.";
 
   return (
-    <div className="min-h-[100dvh] w-full max-w-2xl mx-auto border-x border-[var(--color-paper-dark)]/20 shadow-2xl bg-[var(--color-paper)] flex flex-col font-sans overflow-x-hidden">
+    <main className="min-h-[100dvh] w-full max-w-2xl mx-auto border-x border-[var(--color-paper-dark)]/20 shadow-2xl bg-[var(--color-paper)] flex flex-col font-sans overflow-x-hidden">
       {/* Header */}
       <header className="relative h-16 shrink-0 border-b border-[var(--color-paper-dark)]/20 px-4 flex items-center justify-between bg-[var(--color-paper)] z-50">
         
@@ -133,6 +133,6 @@ export const Documentation: React.FC<DocumentationProps> = ({ onBack }) => {
               </div>
            </div>
       </div>
-    </div>
+    </main>
   );
 };

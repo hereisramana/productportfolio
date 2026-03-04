@@ -13,7 +13,7 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
   }, []);
 
   return (
-    <div className="min-h-[100dvh] w-full max-w-2xl mx-auto border-x border-[var(--color-paper-dark)]/20 shadow-2xl bg-[var(--color-paper)] flex flex-col font-sans overflow-x-hidden">
+    <main className="min-h-[100dvh] w-full max-w-2xl mx-auto border-x border-[var(--color-paper-dark)]/20 shadow-2xl bg-[var(--color-paper)] flex flex-col font-sans overflow-x-hidden">
       {/* Header */}
       <header className="relative h-16 shrink-0 border-b border-[var(--color-paper-dark)]/20 px-4 flex items-center justify-between bg-[var(--color-paper)] z-50">
         
@@ -118,6 +118,6 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
               </div>
            </div>
       </div>
-    </div>
+    </main>
   );
 };
