@@ -6,7 +6,7 @@ import { Layout } from './components/layout/Layout';
 import { useHistoryRouter } from './hooks/useHistoryRouter';
 
 export const App: React.FC = () => {
-  const { view, selectedProjectId, detailMode, navigate, goBack } = useHistoryRouter();
+  const { view, selectedProjectId, navigate, goBack } = useHistoryRouter();
 
   const currentProject = PROJECTS.find(p => p.id === selectedProjectId);
 
@@ -17,7 +17,6 @@ export const App: React.FC = () => {
         <Layout>
             <UnifiedProjectDetail 
                 project={currentProject} 
-                mode={detailMode} 
                 onBack={goBack} 
             />
         </Layout>

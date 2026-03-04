@@ -10,7 +10,8 @@ export const PROJECTS: Project[] = [
     thumbnailUrl: 'https://picsum.photos/800/600?random=1',
     heroUrl: 'https://picsum.photos/1200/600?random=10',
     // TODO: Replace with actual project video. Using placeholder to prevent 404.
-    videoUrl: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
+    videoUrlMobile: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
+    videoUrlDesktop: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
     liveUrl: 'https://smriti-new.vercel.app/',
     description: 'Smriti is a digital sanctuary designed for the anonymous sharing of memories. Unlike traditional social media that prioritizes metrics and engagement, Smriti focuses on catharsis and emotional connection through ephemeral, text-first storytelling.',
     role: 'Lead Product Designer',
@@ -30,7 +31,8 @@ export const PROJECTS: Project[] = [
     thumbnailUrl: 'https://picsum.photos/800/600?random=2',
     heroUrl: 'https://picsum.photos/1200/600?random=20',
     // TODO: Replace with actual project video. Using placeholder to prevent 404.
-    videoUrl: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
+    videoUrlMobile: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
+    videoUrlDesktop: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
     liveUrl: 'https://new-filter.vercel.app/',
     description: 'Flavor Filter is a modular UI system designed for food delivery apps to help users with severe allergies and strict dietary restrictions navigate complex menus safely and efficiently.',
     role: 'Interaction Designer',
@@ -40,6 +42,27 @@ export const PROJECTS: Project[] = [
     interactionNotes: 'I designed a "Sticky Filter Chip" pattern that remains accessible at the bottom of the screen (thumb zone) on mobile. Tapping it expands a modal with large, toggleable allergen icons. The transition uses a spring animation to feel responsive and lightweight.',
     outcome: 'The design system was adopted by a mid-sized delivery startup, resulting in a 15% decrease in support tickets related to allergen inquiries.',
     accentColor: '#F2A188' // Pastel Salmon
+  },
+  {
+    id: 'sonic-wayfinder',
+    title: 'Sonic Wayfinder',
+    tagline: 'Audio-augmented reality navigation for the visually impaired.',
+    summary: 'SONIC WAYFINDER: A spatial audio navigation system that uses 3D soundscapes to guide users through complex urban environments without visual dependency.',
+    tags: ['Audio Design', 'Accessibility', 'Prototyping'],
+    thumbnailUrl: 'https://picsum.photos/800/600?random=3',
+    heroUrl: 'https://picsum.photos/1200/600?random=30',
+    // TODO: Replace with actual project video. Using placeholder to prevent 404.
+    videoUrlMobile: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
+    videoUrlDesktop: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
+    liveUrl: 'https://sonic-wayfinder-demo.vercel.app/',
+    description: 'Sonic Wayfinder reimagines navigation by replacing turn-by-turn voice commands with continuous spatial audio cues. It creates a "virtual sound tether" that users can follow, reducing cognitive load and increasing situational awareness.',
+    role: 'Product Designer & Audio Engineer',
+    duration: '4 Months',
+    challenge: 'Traditional GPS relies on visual maps or intrusive voice commands ("Turn left in 500 feet"). For visually impaired users, this disrupts their auditory attention, which is crucial for safety.',
+    solution: 'A 3D audio engine that places a virtual sound source (e.g., a gentle chime) at the destination. As the user turns their head, the sound stays fixed in space (HRTF), allowing them to intuitively "hear" the direction they need to walk.',
+    interactionNotes: 'The interface is gesture-based and screen-free. A double-tap on the earbud toggles the "Beacon" mode. Haptic feedback on the connected phone intensifies as the user approaches intersections, warning of traffic.',
+    outcome: 'Field tests with 12 visually impaired participants showed a 30% reduction in navigation errors and a reported "sense of independence" compared to standard cane-only navigation.',
+    accentColor: '#5D3FD3' // Iris Purple
   }
 ];
 

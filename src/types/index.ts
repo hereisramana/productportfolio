@@ -6,7 +6,8 @@ export interface Project {
   tags: string[];
   thumbnailUrl: string;
   heroUrl: string;
-  videoUrl?: string;
+  videoUrlMobile?: string;
+  videoUrlDesktop?: string;
   liveUrl?: string;
   description: string;
   role: string;
@@ -19,7 +20,6 @@ export interface Project {
 }
 
 export type ViewState = 'HOME' | 'PROJECT_DETAIL';
-export type DetailMode = 'VIDEO' | 'WRITTEN';
 
 export interface ThemeColors {
   primary: string;

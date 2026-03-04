@@ -1,20 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ViewState, DetailMode } from '../types';
+import { ViewState } from '../types';
 
 interface RouterState {
   view: ViewState;
   selectedProjectId: string | null;
-  detailMode: DetailMode;
-  navigate: (projectId: string, mode?: DetailMode) => void;
+  navigate: (projectId: string) => void;
   goBack: () => void;
-  setDetailMode: (mode: DetailMode) => void;
   clearSelection: () => void;
 }
 
 export const useHistoryRouter = (): RouterState => {
   const [view, setView] = useState<ViewState>('HOME');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  const [detailMode, setDetailMode] = useState<DetailMode>('WRITTEN');
 
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
@@ -25,9 +22,6 @@ export const useHistoryRouter = (): RouterState => {
       } else {
         setView(state.view || 'HOME');
         setSelectedProjectId(state.projectId || null);
-        if (state.mobileMode) {
-            setDetailMode(state.mobileMode);
-        }
       }
     };
 
@@ -44,7 +38,6 @@ export const useHistoryRouter = (): RouterState => {
          // Browser restored state
          setView(state.view || 'HOME');
          setSelectedProjectId(state.projectId || null);
-         if (state.mobileMode) setDetailMode(state.mobileMode);
       } else if (pId) {
          // Deep Link Handling
          if (v === 'detail') {
@@ -75,16 +68,15 @@ export const useHistoryRouter = (): RouterState => {
     };
   }, []);
 
-  const navigate = useCallback((id: string, mode?: DetailMode) => {
+  const navigate = useCallback((id: string) => {
     const detailUrl = `?project=${id}&view=detail`;
     window.history.pushState(
-       { view: 'PROJECT_DETAIL', projectId: id, mobileMode: mode }, 
+       { view: 'PROJECT_DETAIL', projectId: id }, 
        '', 
        detailUrl
     );
     
     setSelectedProjectId(id);
-    if (mode) setDetailMode(mode);
     setView('PROJECT_DETAIL');
   }, []);
 
@@ -99,10 +91,8 @@ export const useHistoryRouter = (): RouterState => {
   return { 
       view, 
       selectedProjectId, 
-      detailMode, 
       navigate, 
       goBack, 
-      setDetailMode,
       clearSelection
   };
 };

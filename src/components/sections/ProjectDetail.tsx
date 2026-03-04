@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
-import { Project, DetailMode } from '../../types';
+import { Project } from '../../types';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 
 interface UnifiedProjectDetailProps {
   project: Project;
-  mode: DetailMode;
   onBack: () => void;
 }
 
-export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ project, mode, onBack }) => {
+export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ project, onBack }) => {
   useEffect(() => {
      window.scrollTo(0,0);
-  }, [mode]);
+  }, []);
 
   return (
     <div className="min-h-[100dvh] w-full max-w-2xl mx-auto border-x border-[var(--color-paper-dark)]/20 shadow-2xl bg-[var(--color-paper)] flex flex-col font-sans overflow-x-hidden">
@@ -21,11 +20,10 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
         {/* Absolute Centered Title Group */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none w-full max-w-[60%]">
            <h1 className="text-xs uppercase font-bold tracking-[0.2em] line-clamp-1 text-center w-full">{project.title}</h1>
-           <span className="text-[9px] uppercase tracking-widest opacity-40">{mode === 'VIDEO' ? 'Video Demo' : 'Case Study'}</span>
         </div>
 
         {/* Left Action */}
-        <button onClick={onBack} className="relative z-10 flex items-center gap-2 p-2 -ml-2 rounded-full active:bg-[var(--color-paper-dim)]">
+        <button onClick={onBack} className="relative z-10 flex items-center gap-2 p-2 -ml-2 rounded-full active:bg-[var(--color-paper-dim)] hover:bg-[var(--color-paper-dim)] transition-colors cursor-pointer">
           <ArrowLeft className="w-5 h-5 text-[var(--color-ink)]" />
         </button>
         
@@ -45,30 +43,6 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
 
       {/* Content */}
       <div className="flex-1 overflow-hidden relative bg-[var(--color-paper)]">
-        {mode === 'VIDEO' && (
-           <div className="h-full w-full flex items-center justify-center bg-[var(--color-paper)] p-4">
-              {/* Vertical Phone Constraint - using aspect-ratio 9/16 and height 100% to fill space */}
-              <div 
-                  className="relative rounded-[var(--radius-md)] overflow-hidden border border-[var(--color-paper-dark)]/30 bg-black shadow-lg"
-                  style={{ 
-                     height: '100%', 
-                     aspectRatio: '9/16', 
-                     width: 'auto',
-                     maxWidth: '100%' 
-                  }}
-              >
-                  <iframe 
-                    src={project.videoUrl} 
-                    className="w-full h-full"
-                    frameBorder="0" 
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    title={`${project.title} Video Demo`}
-                  />
-              </div>
-           </div>
-        )}
-
-        {mode === 'WRITTEN' && (
            <div className="h-full overflow-y-auto bg-[var(--color-paper-dim)] overflow-x-hidden">
               <div className="p-6 pb-24 space-y-12 max-w-full">
                   <div className="pb-8 border-b border-[var(--color-paper-dark)]/50">
@@ -78,28 +52,38 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
                      <p className="text-lg text-[var(--color-ink-subtle)] font-light leading-relaxed">{project.tagline}</p>
                   </div>
 
+                  {/* Hero Image Placeholder */}
+                  <div className="w-full aspect-video bg-[var(--color-paper-dark)]/20 rounded-[var(--radius-md)] overflow-hidden relative">
+                    <img 
+                        src={project.heroUrl} 
+                        alt={`${project.title} Hero`}
+                        className="w-full h-full object-cover opacity-80"
+                        referrerPolicy="no-referrer"
+                    />
+                  </div>
+
                   <section>
                      <h3 className="font-mono text-[10px] uppercase tracking-widest text-[var(--color-ink)] opacity-40 mb-4 border-b border-[var(--color-paper-dark)]/30 pb-2">System Context</h3>
                      <p className="text-base leading-relaxed text-[var(--color-ink)] font-light text-balance">{project.description}</p>
                   </section>
 
-                  <section className="space-y-6">
-                     <h3 className="font-mono text-[10px] uppercase tracking-widest text-[var(--color-ink)] opacity-40">Architecture</h3>
-                     {/* Darker inner card for contrast against paper-dim background */}
-                     <div className="p-6 bg-[var(--color-paper-dark)]/30 rounded-[var(--radius-md)] border border-[var(--color-paper-dark)]/30 space-y-6">
+                  <section className="space-y-8">
+                     <h3 className="font-mono text-[10px] uppercase tracking-widest text-[var(--color-ink)] opacity-40 border-b border-[var(--color-paper-dark)]/30 pb-2">Architecture</h3>
+                     {/* Flattened content - removed card styling */}
+                     <div className="space-y-6">
                         <div className="space-y-2">
                            <span className="font-mono text-[9px] uppercase tracking-wider text-[var(--color-ink)] opacity-50">The Challenge</span>
-                           <p className="text-sm leading-relaxed text-[var(--color-ink-subtle)]">{project.challenge}</p>
+                           <p className="text-base leading-relaxed text-[var(--color-ink-subtle)] font-light">{project.challenge}</p>
                         </div>
                         <div className="space-y-2">
                            <span className="font-mono text-[9px] uppercase tracking-wider text-[var(--color-ink)] opacity-50">The Resolution</span>
-                           <p className="text-sm leading-relaxed text-[var(--color-ink-subtle)]">{project.solution}</p>
+                           <p className="text-base leading-relaxed text-[var(--color-ink-subtle)] font-light">{project.solution}</p>
                         </div>
                      </div>
                   </section>
 
                   <section>
-                     <h3 className="font-mono text-[10px] uppercase tracking-widest text-[var(--color-ink)] opacity-40 mb-4">Interaction Logic</h3>
+                     <h3 className="font-mono text-[10px] uppercase tracking-widest text-[var(--color-ink)] opacity-40 mb-4 border-b border-[var(--color-paper-dark)]/30 pb-2">Interaction Logic</h3>
                      <div className="pl-4 border-l-[3px] border-[#2B6B7C]/40">
                         <p className="text-lg leading-relaxed text-[var(--color-ink)] italic font-light">{project.interactionNotes}</p>
                      </div>
@@ -112,7 +96,6 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
                   </section>
               </div>
            </div>
-        )}
       </div>
     </div>
   );

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { PROJECTS, DOCUMENTATION_TEXT, TECH_STACK } from '../../constants/siteData';
-import { DetailMode } from '../../types';
 import { Mail, Github, Phone } from 'lucide-react';
 import { ProjectGridTile } from '../ui/Card';
 
 interface HomeProps {
-  onNavigate: (projectId: string, mode?: DetailMode) => void;
+  onNavigate: (projectId: string) => void;
 }
 
 type Tab = 'WORKS' | 'DOCUMENTATION';
@@ -88,7 +87,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    <ProjectGridTile 
                       key={project.id} 
                       project={project} 
-                      onNavigate={(id, mode) => onNavigate(id, mode || 'WRITTEN')}
+                      onNavigate={onNavigate}
                    />
                 ))}
              </div>
