@@ -1,5 +1,5 @@
 import React, { useState, KeyboardEvent } from 'react';
-import { Project, DetailMode } from '../types';
+import { Project, DetailMode } from '../../types';
 import { Play, FileText, ArrowUpRight } from 'lucide-react';
 
 interface ProjectGridTileProps {

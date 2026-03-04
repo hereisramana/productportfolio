@@ -1,8 +1,8 @@
 import React from 'react';
-import { PROJECTS } from './constants';
-import { Home } from './components/Home';
-import { UnifiedProjectDetail } from './components/UnifiedProjectDetail';
-import { Layout } from './components/Layout';
+import { PROJECTS } from './constants/siteData';
+import { Home } from './components/sections/Home';
+import { UnifiedProjectDetail } from './components/sections/ProjectDetail';
+import { Layout } from './components/layout/Layout';
 import { useHistoryRouter } from './hooks/useHistoryRouter';
 
 export const App: React.FC = () => {

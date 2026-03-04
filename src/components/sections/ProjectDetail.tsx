@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Project, DetailMode } from '../types';
+import { Project, DetailMode } from '../../types';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 
 interface UnifiedProjectDetailProps {

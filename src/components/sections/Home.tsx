@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { PROJECTS, DOCUMENTATION_TEXT, TECH_STACK } from '../constants';
-import { DetailMode } from '../types';
+import { PROJECTS, DOCUMENTATION_TEXT, TECH_STACK } from '../../constants/siteData';
+import { DetailMode } from '../../types';
 import { Mail, Github, Phone } from 'lucide-react';
-import { ProjectGridTile } from './ProjectGridTile';
+import { ProjectGridTile } from '../ui/Card';
 
 interface HomeProps {
   onNavigate: (projectId: string, mode?: DetailMode) => void;
