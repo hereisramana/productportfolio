@@ -194,22 +194,24 @@ h1, h2, h3, h4, h5, h6 {
   100% { background-position: 0% 50%; }
 }
 
-.gradient-border-teal {
-  position: relative;
-  background: var(--color-paper);
-  background-clip: padding-box;
-  border: 2px solid transparent;
-  border-radius: var(--radius-lg);
-}
+@media (min-width: 768px) {
+  .gradient-border-teal {
+    position: relative;
+    background: var(--color-paper);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+  }
 
-.gradient-border-teal::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  z-index: -1;
-  margin: -2px;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #2B6B7C, #3A8CA3, #2B6B7C);
-  background-size: 200% 200%;
-  animation: border-flow 3s ease infinite;
+  .gradient-border-teal::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #2B6B7C, #3A8CA3, #2B6B7C);
+    background-size: 200% 200%;
+    animation: border-flow 3s ease infinite;
+  }
 }

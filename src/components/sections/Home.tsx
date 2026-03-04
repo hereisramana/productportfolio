@@ -87,8 +87,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentatio
                </div>
                
                {/* Theme Toggle Bar */}
-               <div className="flex items-center gap-1 self-end mt-1 mr-7">
-                 <Sun className="w-4 h-4 text-[var(--color-ink)]" />
+               <div className="flex items-center gap-1 self-end mt-1">
+                 <button 
+                   onClick={toggleTheme}
+                   className="p-1 rounded-full hover:bg-[var(--color-paper-dark)]/20 cursor-pointer touch-manipulation transition-colors"
+                   aria-label="Switch to light mode"
+                 >
+                   <Sun className="w-4 h-4 text-[var(--color-ink)]" />
+                 </button>
                  <button
                    onClick={toggleTheme}
                    className="w-12 h-12 flex items-center justify-center cursor-pointer group touch-manipulation"
@@ -98,21 +104,27 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentatio
                      <div className={`absolute w-2.5 h-2.5 bg-[var(--color-ink)] shadow-sm transition-transform duration-200 ease-out ${theme === 'dark' ? 'translate-x-[18px]' : 'translate-x-[3px]'}`} />
                    </div>
                  </button>
-                 <Moon className="w-4 h-4 text-[var(--color-ink)]" />
+                 <button 
+                   onClick={toggleTheme}
+                   className="p-1 rounded-full hover:bg-[var(--color-paper-dark)]/20 cursor-pointer touch-manipulation transition-colors"
+                   aria-label="Switch to dark mode"
+                 >
+                   <Moon className="w-4 h-4 text-[var(--color-ink)]" />
+                 </button>
                </div>
              </div>
          </div>
   
          {/* Hero - Common */}
          <div className="px-6 pt-12 pb-12 max-w-7xl mx-auto w-full">
-            <div className="p-8 gradient-border-teal">
-                <h2 className="text-6xl font-medium tracking-tight leading-[1.05] mb-6 text-[var(--color-ink)]">Product Design.</h2>
+            <div className="md:p-8 gradient-border-teal">
+                <h2 className="text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] mb-6 text-[var(--color-ink)]">Product Design.</h2>
                 <p className="text-xl text-[var(--color-ink-subtle)] leading-relaxed max-w-2xl mb-8">
                   This portfolio is a product in itself, built to demonstrate technical literacy and systemic thinking.
                 </p>
                 <button 
                   onClick={onNavigateToDocumentation}
-                  className="px-8 py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] active:scale-95 transition-all cursor-pointer"
+                  className="w-full md:w-auto px-8 py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] active:scale-95 transition-all cursor-pointer flex items-center justify-center"
                 >
                   case study of this site
                 </button>
