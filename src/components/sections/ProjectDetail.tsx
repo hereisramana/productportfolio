@@ -23,7 +23,7 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
         </div>
 
         {/* Left Action */}
-        <button onClick={onBack} className="relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-md)] border border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-white active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-white transition-all cursor-pointer group">
+        <button onClick={onBack} className="relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-md)] border border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] transition-all cursor-pointer group">
           <ArrowLeft className="w-4 h-4" />
           <span className="text-[10px] font-bold uppercase tracking-wider">Back</span>
         </button>
@@ -98,7 +98,7 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
 
                   {/* Bottom Actions */}
                   <div className="flex items-center justify-between pt-8 border-t border-[var(--color-paper-dark)]/30">
-                    <button onClick={onBack} className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-md)] border border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-white active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-white transition-all cursor-pointer group">
+                    <button onClick={onBack} className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-md)] border border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] transition-all cursor-pointer group">
                       <ArrowLeft className="w-4 h-4" />
                       <span className="text-[10px] font-bold uppercase tracking-wider">Back</span>
                     </button>

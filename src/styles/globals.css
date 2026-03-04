@@ -36,6 +36,26 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
+
+  /* Button Text Inverse */
+  --color-on-active: #FFFFFF;
+  
+  /* Static Light Paper for Image Backgrounds in Dark Mode */
+  --color-paper-static-light: #E6E5E3;
+}
+
+/* Dark Mode Overrides */
+.dark {
+  --color-paper: #121212;
+  --color-paper-dim: #1E1E1E;
+  --color-paper-dark: #333333;
+  --color-ink: #E0E0E0;
+  --color-ink-subtle: #A0A0A0;
+  --color-accent: #A0A0A0;
+  --color-accent-light: #333333;
+  
+  /* In Dark Mode, active buttons (white bg) need black text */
+  --color-on-active: #000000;
 }
 
 /* Reset & Base */
@@ -48,6 +68,7 @@ body {
   line-height: 1.5; 
   overflow-x: hidden;
   position: relative;
+  transition: background-color 0.3s var(--ease-soft), color 0.3s var(--ease-soft);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -120,9 +141,19 @@ h1, h2, h3, h4, h5, h6 {
   mix-blend-mode: multiply;
   transition: filter 0.5s var(--ease-soft);
 }
-/* Reveal color slightly on hover for utility */
+
+/* In dark mode, we need to ensure the image container is light for multiply to work, 
+   OR we switch to normal blend mode if we can't control container. 
+   But user asked for "same as light mode", which implies the multiply look.
+   We will handle the container background in the component. 
+   However, if we want to be safe, we can default to normal in dark mode if not handled.
+   But let's stick to the component fix.
+*/
+
+/* Reveal color slightly on hover for utility or when in view on mobile */
 .group:hover .image-technical, 
-.image-technical:hover {
+.image-technical:hover,
+.image-technical.in-view {
   filter: grayscale(20%) contrast(100%) brightness(100%);
   mix-blend-mode: normal;
 }
