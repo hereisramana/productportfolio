@@ -1,4 +1,4 @@
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import { Project } from '../../types';
 
 interface ProjectGridTileProps {
@@ -7,36 +7,82 @@ interface ProjectGridTileProps {
 }
 
 export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNavigate }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      onNavigate(project.id);
+      setIsFlipped(!isFlipped);
     }
   };
 
   return (
     <div 
-      className="group relative flex flex-col text-left transition-all duration-300 cursor-pointer h-full hover:-translate-y-1"
-      onClick={() => onNavigate(project.id)}
-      onKeyDown={handleKeyDown}
+      className="group relative h-full perspective-1000 cursor-pointer focus:outline-none"
       role="button"
       tabIndex={0}
       aria-label={`View details for ${project.title}`}
+      onClick={() => setIsFlipped(!isFlipped)}
+      onKeyDown={handleKeyDown}
     >
-      <div className="relative w-full aspect-square overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-paper-dark)]/30 shadow-sm bg-[var(--color-paper-dim)]">
-        <img 
-          src={project.thumbnailUrl} 
-          alt="" 
-          className="w-full h-full object-cover image-technical transition-all duration-500 group-hover:scale-105" 
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90" />
-        <div className="absolute inset-0 p-6 flex flex-col justify-end">
-          <p className="text-[10px] font-mono uppercase tracking-widest text-white/50 mb-2">{project.role}</p>
-          <h3 className="text-white font-medium text-lg leading-tight mb-3">{project.title}</h3>
-          <p className="text-xs leading-relaxed text-white/80 font-light text-balance line-clamp-3">{project.summary}</p>
+      <div 
+        className="relative w-full aspect-square transition-all duration-500 transform-style-3d"
+        style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+      >
+        
+        {/* Front Face */}
+        <div className="absolute inset-0 backface-hidden rounded-[var(--radius-md)] overflow-hidden shadow-sm bg-[var(--color-paper)] group-hover:ring-2 group-hover:ring-[#2B6B7C] group-focus:ring-2 group-focus:ring-[#2B6B7C] transition-all duration-300">
+          <img 
+            src={project.thumbnailUrl} 
+            alt="" 
+            className="w-full h-full object-cover image-technical" 
+            loading="lazy"
+          />
         </div>
+
+        {/* Back Face */}
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-md)] bg-[var(--color-paper-dim)] p-6 flex flex-col justify-between shadow-sm border border-[var(--color-paper-dark)]/30 group-hover:ring-2 group-hover:ring-[#2B6B7C] group-focus:ring-2 group-focus:ring-[#2B6B7C] transition-all duration-300">
+           
+           {/* Header / Metrics */}
+           <div>
+              <div className="flex justify-between items-start mb-3">
+                <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-ink-subtle)]">{project.role}</p>
+                <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-ink-subtle)]">{project.duration}</p>
+              </div>
+              <h3 className="text-xl font-bold text-[var(--color-ink)] mb-3 leading-tight">{project.title}</h3>
+              <p className="text-sm text-[var(--color-ink)] leading-relaxed line-clamp-4">{project.summary}</p>
+           </div>
+
+           {/* Actions */}
+           <div className="flex flex-col gap-2 mt-4">
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onNavigate(project.id);
+                }}
+                className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-white active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-white active:scale-95 transition-all cursor-pointer"
+              >
+                 Case Study
+              </button>
+              
+              {project.liveUrl ? (
+                <a 
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()} 
+                  className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[#2B6B7C] text-[#2B6B7C] rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[#2B6B7C] hover:text-white active:bg-[#2B6B7C] active:text-white active:scale-95 transition-all cursor-pointer"
+                >
+                  Prototype
+                </a>
+              ) : (
+                <button disabled className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-paper-dark)] text-[var(--color-ink-subtle)] rounded-[var(--radius-md)] opacity-50 cursor-not-allowed">
+                  Prototype N/A
+                </button>
+              )}
+           </div>
+        </div>
+
       </div>
     </div>
   );

@@ -4,7 +4,8 @@ import { ViewState } from '../types';
 interface RouterState {
   view: ViewState;
   selectedProjectId: string | null;
-  navigate: (projectId: string) => void;
+  navigateToProject: (projectId: string) => void;
+  navigateToDocumentation: () => void;
   goBack: () => void;
   clearSelection: () => void;
 }
@@ -38,6 +39,23 @@ export const useHistoryRouter = (): RouterState => {
          // Browser restored state
          setView(state.view || 'HOME');
          setSelectedProjectId(state.projectId || null);
+      } else if (v === 'documentation') {
+         // Reconstruct History: Home -> Documentation
+         window.history.replaceState(
+            { view: 'HOME' }, 
+            '', 
+            '/'
+         );
+         
+         const docUrl = `?view=documentation`;
+         window.history.pushState(
+            { view: 'DOCUMENTATION' }, 
+            '', 
+            docUrl
+         );
+
+         setSelectedProjectId(null);
+         setView('DOCUMENTATION');
       } else if (pId) {
          // Deep Link Handling
          if (v === 'detail') {
@@ -68,7 +86,7 @@ export const useHistoryRouter = (): RouterState => {
     };
   }, []);
 
-  const navigate = useCallback((id: string) => {
+  const navigateToProject = useCallback((id: string) => {
     const detailUrl = `?project=${id}&view=detail`;
     window.history.pushState(
        { view: 'PROJECT_DETAIL', projectId: id }, 
@@ -78,6 +96,18 @@ export const useHistoryRouter = (): RouterState => {
     
     setSelectedProjectId(id);
     setView('PROJECT_DETAIL');
+  }, []);
+
+  const navigateToDocumentation = useCallback(() => {
+    const docUrl = `?view=documentation`;
+    window.history.pushState(
+       { view: 'DOCUMENTATION' }, 
+       '', 
+       docUrl
+    );
+    
+    setSelectedProjectId(null);
+    setView('DOCUMENTATION');
   }, []);
 
   const goBack = useCallback(() => {
@@ -91,7 +121,8 @@ export const useHistoryRouter = (): RouterState => {
   return { 
       view, 
       selectedProjectId, 
-      navigate, 
+      navigateToProject, 
+      navigateToDocumentation,
       goBack, 
       clearSelection
   };

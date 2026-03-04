@@ -1,29 +1,52 @@
 import React, { useState } from 'react';
-import { PROJECTS, DOCUMENTATION_TEXT, TECH_STACK } from '../../constants/siteData';
+import { PROJECTS } from '../../constants/siteData';
 import { Mail, Github, Phone } from 'lucide-react';
 import { ProjectGridTile } from '../ui/Card';
 
 interface HomeProps {
   onNavigate: (projectId: string) => void;
+  onNavigateToDocumentation: () => void;
 }
 
-type Tab = 'WORKS' | 'DOCUMENTATION';
+export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentation }) => {
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
-export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
-  const [activeTab, setActiveTab] = useState<Tab>('WORKS');
+  const handleCopy = (e: React.MouseEvent, text: string, id: string) => {
+    // Check if desktop (md breakpoint is usually 768px)
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      e.preventDefault();
+      navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    }
+  };
 
-  const baseIconBtnStyle = "p-2 rounded-[var(--radius-sm)] border border-[var(--color-paper-dark)]/30 text-[var(--color-ink)] transition-all active:scale-90 flex items-center justify-center w-9 h-9 group";
+  const getFeedbackText = (id: string) => {
+    if (id === 'phone') return 'Phone number copied';
+    if (id === 'email') return 'Email address copied';
+    return 'Copied to clipboard';
+  };
+
+  const baseIconBtnStyle = "p-2 rounded-[var(--radius-sm)] border border-[var(--color-paper-dark)]/30 text-[var(--color-ink)] transition-all active:scale-90 flex items-center justify-center w-9 h-9 group hover:bg-[#2B6B7C] hover:text-white hover:border-[#2B6B7C] active:bg-[#2B6B7C] active:text-white active:border-[#2B6B7C]";
 
   return (
-    <div className={`min-h-[100dvh] w-full flex flex-col transition-colors duration-500 ${activeTab === 'DOCUMENTATION' ? 'bg-[var(--color-paper-dim)]' : 'bg-[var(--color-paper)]'}`}>
+    <div className="min-h-[100dvh] w-full flex flex-col bg-[var(--color-paper)]">
+       {/* Feedback Toast */}
+       {copiedId && (
+         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-[var(--color-ink)] text-[var(--color-paper)] text-xs font-mono uppercase tracking-widest rounded-[var(--radius-sm)] shadow-lg z-50 animate-in fade-in slide-in-from-bottom-2 duration-300 pointer-events-none">
+           {getFeedbackText(copiedId)}
+         </div>
+       )}
+
        {/* Header */}
-       <div className={`flex justify-between items-center px-6 py-6 border-b border-[var(--color-paper-dark)]/10 transition-colors ${activeTab === 'DOCUMENTATION' ? 'bg-[var(--color-paper-dim)]' : 'bg-[var(--color-paper)]'}`}>
+       <div className="flex justify-between items-center px-6 py-6 border-b border-[var(--color-paper-dark)]/10 bg-[var(--color-paper)]">
           <h1 className="font-mono text-sm font-bold text-[var(--color-ink)] lowercase tracking-tight">ramanadesign.tech</h1>
            <div className="flex items-center gap-1.5">
              <a 
                href="tel:+1234567890" 
-               className={`${baseIconBtnStyle} active:bg-[#007AFF] active:border-[#007AFF] active:text-white hover:bg-[#007AFF] hover:border-[#007AFF] hover:text-white`} 
+               className={baseIconBtnStyle} 
                aria-label="Phone"
+               onClick={(e) => handleCopy(e, '+1234567890', 'phone')}
              >
                <Phone className="w-4 h-4" />
              </a>
@@ -31,15 +54,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                href="https://github.com" 
                target="_blank" 
                rel="noreferrer" 
-               className={`${baseIconBtnStyle} active:bg-[#333333] active:border-[#333333] active:text-white hover:bg-[#333333] hover:border-[#333333] hover:text-white`} 
+               className={baseIconBtnStyle} 
                aria-label="GitHub"
              >
                <Github className="w-4 h-4" />
              </a>
              <a 
                href="mailto:hello@ramanadesign.tech" 
-               className={`${baseIconBtnStyle} active:bg-[#007AFF] active:border-[#007AFF] active:text-white hover:bg-[#007AFF] hover:border-[#007AFF] hover:text-white`} 
+               className={baseIconBtnStyle} 
                aria-label="Email"
+               onClick={(e) => handleCopy(e, 'hello@ramanadesign.tech', 'email')}
              >
                <Mail className="w-4 h-4" />
              </a>
@@ -47,41 +71,33 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                href="https://linkedin.com" 
                target="_blank" 
                rel="noreferrer" 
-               className={`${baseIconBtnStyle} active:bg-[#0077b5] active:border-[#0077b5] active:text-white hover:bg-[#0077b5] hover:border-[#0077b5] hover:text-white`} 
+               className={baseIconBtnStyle} 
                aria-label="LinkedIn"
              >
-               <span className="text-[15px] font-bold leading-none opacity-80 active:opacity-100 pb-0.5" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>in</span>
+               <span className="text-[15px] font-bold leading-none pb-0.5" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>in</span>
              </a>
            </div>
        </div>
 
        {/* Hero - Common */}
-       <div className="px-6 pt-8 pb-6 max-w-7xl mx-auto w-full">
-          <h2 className="text-3xl font-medium tracking-tight leading-[1.05] mb-4 text-[var(--color-ink)]">Product Design.</h2>
-          <p className="text-lg text-[var(--color-ink-subtle)] leading-relaxed max-w-2xl">This portfolio is a product in itself, built to demonstrate technical literacy and systemic thinking.</p>
-       </div>
-
-       {/* Sticky Toggle Bar - CENTERED */}
-       <div className="sticky top-0 z-30 bg-inherit backdrop-blur-sm border-b border-[var(--color-paper-dark)]/20 px-6 flex justify-center gap-12">
-          <button 
-            onClick={() => setActiveTab('WORKS')} 
-            className={`py-3 text-xs font-bold uppercase tracking-widest relative transition-colors ${activeTab === 'WORKS' ? 'text-[var(--color-ink)]' : 'text-[var(--color-ink)]/40'}`}
-          >
-            Works
-            {activeTab === 'WORKS' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--color-ink)] rounded-full" />}
-          </button>
-          <button 
-            onClick={() => setActiveTab('DOCUMENTATION')} 
-            className={`py-3 text-xs font-bold uppercase tracking-widest relative transition-colors ${activeTab === 'DOCUMENTATION' ? 'text-[var(--color-ink)]' : 'text-[var(--color-ink)]/40'}`}
-          >
-            Documentation
-            {activeTab === 'DOCUMENTATION' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--color-ink)] rounded-full" />}
-          </button>
+       <div className="px-6 pt-12 pb-12 max-w-7xl mx-auto w-full">
+          <div className="p-8 gradient-border-teal">
+              <h2 className="text-6xl font-medium tracking-tight leading-[1.05] mb-6 text-[var(--color-ink)]">Product Design.</h2>
+              <p className="text-xl text-[var(--color-ink-subtle)] leading-relaxed max-w-2xl mb-8">
+                This portfolio is a product in itself, built to demonstrate technical literacy and systemic thinking.
+              </p>
+              <button 
+                onClick={onNavigateToDocumentation}
+                className="px-8 py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-white active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-white active:scale-95 transition-all cursor-pointer"
+              >
+                case study of this site
+              </button>
+          </div>
        </div>
 
        {/* Content Area */}
        <div className="flex-1 p-6 pb-24 w-full max-w-7xl mx-auto">
-          {activeTab === 'WORKS' ? (
+             <h3 className="text-xs font-bold uppercase tracking-widest text-[var(--color-ink)] mb-6 opacity-50">Projects</h3>
              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-in slide-in-from-bottom-2 duration-500">
                 {PROJECTS.map((project) => (
                    <ProjectGridTile 
@@ -91,26 +107,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    />
                 ))}
              </div>
-          ) : (
-             <div className="animate-in slide-in-from-bottom-2 duration-300 space-y-12 py-4 px-2 max-w-2xl mx-auto">
-                <div className="prose prose-stone">
-                    <p className="text-base leading-relaxed text-[var(--color-ink)] whitespace-pre-line">{DOCUMENTATION_TEXT.trim()}</p>
-                </div>
-                
-                <div className="space-y-8">
-                    {TECH_STACK.map(group => (
-                    <div key={group.category}>
-                        <h3 className="font-mono text-[10px] uppercase tracking-widest mb-3 opacity-50 border-b border-[var(--color-paper-dark)]/30 pb-2 text-[var(--color-ink)]">{group.category}</h3>
-                        <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
-                            {group.items.map(item => (
-                                <li key={item} className="text-sm font-medium text-[var(--color-ink)] opacity-80">{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-                    ))}
-                </div>
-             </div>
-          )}
        </div>
     </div>
   );

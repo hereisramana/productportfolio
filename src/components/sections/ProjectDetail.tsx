@@ -23,8 +23,9 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
         </div>
 
         {/* Left Action */}
-        <button onClick={onBack} className="relative z-10 flex items-center gap-2 p-2 -ml-2 rounded-full active:bg-[var(--color-paper-dim)] hover:bg-[var(--color-paper-dim)] transition-colors cursor-pointer">
-          <ArrowLeft className="w-5 h-5 text-[var(--color-ink)]" />
+        <button onClick={onBack} className="relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-md)] border border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-white active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-white transition-all cursor-pointer group">
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-[10px] font-bold uppercase tracking-wider">Back</span>
         </button>
         
         {/* Right Action */}
@@ -33,7 +34,7 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
             href={project.liveUrl} 
             target="_blank" 
             rel="noreferrer" 
-            className="relative z-10 flex items-center gap-1.5 px-3 py-1.5 bg-[var(--color-ink)] text-white rounded-full transition-colors active:bg-[#D4FF00] active:text-black hover:bg-[#D4FF00] hover:text-black"
+            className="relative z-10 flex items-center gap-1.5 px-3 py-1.5 border border-[#2B6B7C] text-[#2B6B7C] rounded-[var(--radius-md)] transition-colors hover:bg-[#2B6B7C] hover:text-white active:bg-[#2B6B7C] active:text-white active:scale-95"
           >
              <span className="text-[9px] font-bold uppercase tracking-widest">Prototype</span>
              <ArrowUpRight className="w-3 h-3" />
@@ -94,6 +95,26 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
                      {/* Matching Desktop Outcome Style: High Contrast */}
                      <p className="text-sm leading-relaxed text-[var(--color-paper)] font-medium bg-[var(--color-ink)] p-6 rounded-[var(--radius-md)]">{project.outcome}</p>
                   </section>
+
+                  {/* Bottom Actions */}
+                  <div className="flex items-center justify-between pt-8 border-t border-[var(--color-paper-dark)]/30">
+                    <button onClick={onBack} className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-md)] border border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-white active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-white transition-all cursor-pointer group">
+                      <ArrowLeft className="w-4 h-4" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider">Back</span>
+                    </button>
+
+                    {project.liveUrl && (
+                      <a 
+                        href={project.liveUrl} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="flex items-center gap-1.5 px-3 py-1.5 border border-[#2B6B7C] text-[#2B6B7C] rounded-[var(--radius-md)] transition-colors hover:bg-[#2B6B7C] hover:text-white active:bg-[#2B6B7C] active:text-white active:scale-95"
+                      >
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Prototype</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
               </div>
            </div>
       </div>

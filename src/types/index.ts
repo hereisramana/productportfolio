@@ -19,7 +19,7 @@ export interface Project {
   accentColor?: string;
 }
 
-export type ViewState = 'HOME' | 'PROJECT_DETAIL';
+export type ViewState = 'HOME' | 'PROJECT_DETAIL' | 'DOCUMENTATION';
 
 export interface ThemeColors {
   primary: string;
