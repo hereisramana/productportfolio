@@ -1,0 +1,158 @@
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+@import "tailwindcss";
+
+@theme {
+  /* Industrial Clay / Technical Stone Palette (Scientific Low-Strain) */
+  /* Backgrounds: Neutral, matter-like, non-emissive */
+  --color-paper: #E6E5E3; /* Stone Grey - 88% Lightness (Photophobia friendly) */
+  --color-paper-dim: #DAD8D5; /* Darker Clay - Distinct differentiation */
+  --color-paper-dark: #C4C2BF; /* Structural Concrete - High structural contrast */
+  
+  /* Typography: Matte, non-vibrating */
+  --color-ink: #1F1F1F; /* Matte Carbon - Pure, soft black */
+  --color-ink-subtle: #5E5C59; /* Technical Graphite */
+  
+  /* Accents: Engineered Nature */
+  --color-accent: #464C47; /* Deep Industrial Moss */
+  --color-accent-light: #CFCFCF; /* Silver/Aluminum selection */
+
+  /* Fonts */
+  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Spacing */
+  --spacing-grid: 24px;
+
+  /* Animation - Softer, organic feel */
+  --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+  
+  /* Shapes */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+}
+
+/* Reset & Base */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5; 
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Typography Utilities */
+.font-mono-tight {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Utility: Soft Borders */
+.border-b-ink { border-bottom: 1px solid var(--color-paper-dark); }
+.border-t-ink { border-top: 1px solid var(--color-paper-dark); }
+.border-l-ink { border-left: 1px solid var(--color-paper-dark); }
+.border-r-ink { border-right: 1px solid var(--color-paper-dark); }
+
+/* Interaction: Soft Glow/Shift instead of Invert */
+.hover-soft {
+  transition: background-color 0.2s var(--ease-soft), color 0.2s var(--ease-soft);
+}
+.hover-soft:hover {
+  background-color: var(--color-paper-dim);
+  color: var(--color-ink);
+}
+
+/* Custom Scrollbar - Technical/Industrial with Micro Gap */
+::-webkit-scrollbar {
+  width: 10px; /* Increased width to allow padding/gap */
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-block: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #666; /* Slightly darker to sit better on dark bg, but visible */
+  border-radius: 99px; /* Pill shape for smoother floating look */
+  border: 3px solid transparent; /* Creates the gap: 10px width - 3px left - 3px right = 4px visible thumb */
+  background-clip: content-box; /* Clips background to content, leaving border transparent */
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #999; /* Lighter on hover */
+}
+
+/* Selection */
+::selection {
+  background: var(--color-accent-light);
+  color: var(--color-ink);
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 2. Technical Image Filter (E-Ink Approximation) */
+.image-technical {
+  filter: grayscale(100%) contrast(115%) brightness(0.95);
+  mix-blend-mode: multiply;
+  transition: filter 0.5s var(--ease-soft);
+}
+/* Reveal color slightly on hover for utility */
+.group:hover .image-technical, 
+.image-technical:hover {
+  filter: grayscale(20%) contrast(100%) brightness(100%);
+  mix-blend-mode: normal;
+}
+
+/* 3. Analog Noise (Film Grain) */
+.bg-noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 5. 3D Flip Card Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
