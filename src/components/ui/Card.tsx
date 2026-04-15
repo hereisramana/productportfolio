@@ -37,10 +37,10 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
   return (
     <div 
       ref={cardRef}
-      className="group relative flex flex-col gap-4 perspective-1000"
+      className="group relative flex flex-col gap-[10px] perspective-1000"
     >
       <div 
-        className="relative w-full aspect-[4/5] md:aspect-[3/4] transition-all duration-700 transform-style-3d"
+        className="relative w-full aspect-[405/321] transition-all duration-700 transform-style-3d"
         style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         
