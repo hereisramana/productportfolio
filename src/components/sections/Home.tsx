@@ -70,21 +70,22 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentatio
         {/* Hero - Montserrat & Chivo Mono */}
         <div className="px-6 pt-24 pb-20 max-w-7xl mx-auto w-full">
           <div className="flex flex-col items-start gap-10">
-            <h2 className="text-7xl md:text-9xl font-bold tracking-tighter leading-[0.9] text-[var(--color-ink)] uppercase" style={{ fontFamily: 'var(--font-accent)' }}>
-              Product <br /> Designer.
+            <h2 className="text-[64px] font-bold tracking-tighter leading-tight text-[var(--color-ink)] uppercase" style={{ fontFamily: 'var(--font-accent)' }}>
+              Product Designer.
             </h2>
             
             <div className="space-y-2">
-              <p className="text-lg md:text-xl text-[var(--color-ink)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
+              <p className="text-[18px] text-[var(--color-ink)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
                 I design end-to-end products.
               </p>
-              <p className="text-lg md:text-xl text-[var(--color-ink-subtle)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
+              <p className="text-[18px] text-[var(--color-ink-subtle)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
                 I'm skilled at handling every stage, from discovery to delivery.
               </p>
-              <p className="text-lg md:text-xl text-[var(--color-ink-subtle)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
+              <p className="text-[18px] text-[var(--color-ink-subtle)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
                 Always eager to learn and grow through new work experiences.
               </p>
             </div>
+
 
             <div className="pt-6">
               <button
