@@ -1,3 +1,7 @@
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/700.css";
+@import "@fontsource/chivo-mono/400.css";
+@import "@fontsource/chivo-mono/500.css";
 @import "@fontsource/ibm-plex-sans/400.css";
 @import "@fontsource/ibm-plex-sans/500.css";
 @import "@fontsource/ibm-plex-sans/600.css";
@@ -25,6 +29,8 @@
   /* Fonts */
   --font-sans: 'IBM Plex Sans', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
+  --font-accent: 'Montserrat', sans-serif;
+  --font-mono-chivo: 'Chivo Mono', monospace;
 
   /* Spacing */
   --spacing-grid: 24px;
@@ -33,9 +39,9 @@
   --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
   
   /* Shapes */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 12px;
+  --radius-sm: 4px; /* Reverted to 4px */
+  --radius-md: 8px; /* Reverted to 8px */
+  --radius-lg: 16px; /* Reverted to 16px */
 
   /* Button Text Inverse */
   --color-on-active: #323840;
@@ -43,6 +49,7 @@
   /* Static light paper for image backings */
   --color-paper-static-light: #E6E5E3;
 }
+
 
 /* Reverse Theme for Light Mode */
 :root:not(.dark) {
