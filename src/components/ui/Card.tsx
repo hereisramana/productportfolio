@@ -123,9 +123,11 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
       <div className={`mt-2 transition-opacity duration-300 ${isFlipped ? 'opacity-0' : 'opacity-100'}`}>
          <h4 className="text-2xl font-bold text-[var(--color-ink)] mb-1">{project.title}</h4>
          <p className="text-sm font-mono text-[var(--color-ink-subtle)]">{project.tagline}</p>
+      </div>
     </div>
   );
 };
+
 
 
 
