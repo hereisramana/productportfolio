@@ -64,40 +64,57 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
           />
         </div>
 
-        {/* Back Face */}
+        {/* Back Face - Technical Blueprint Look */}
         <div 
-          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-[40px] bg-[var(--color-ink)] p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 cursor-pointer"
+          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-[32px] bg-[#D9D9D9] flex flex-col shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-[#323840]/20"
           aria-hidden={!isFlipped}
           onClick={() => setIsFlipped(false)}
+          style={{ filter: 'url(#noise-filter)' }}
         >
-           <div className="mt-2">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--color-on-active)] opacity-60 mb-4">{project.tags[0]}</p>
-              <h3 className="text-2xl font-bold text-[var(--color-on-active)] mb-4 leading-tight">{project.title}</h3>
-              <p className="text-sm text-[var(--color-on-active)] opacity-80 leading-relaxed font-mono line-clamp-6">{project.summary}</p>
+           {/* Charcoal Header Block */}
+           <div className="bg-[#323840] px-8 pt-6 pb-4 flex flex-col gap-1 rounded-t-[var(--radius-lg)] md:rounded-t-[32px]">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-[#5479A2]" />
+                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#F0F0F0] opacity-60">Project metadata // 001</p>
+              </div>
+              <h3 className="text-xl font-bold text-[#F0F0F0] tracking-tight uppercase" style={{ fontFamily: 'var(--font-accent)' }}>{project.title}</h3>
            </div>
 
-           <div className="flex flex-col gap-3 mt-4">
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onNavigate(project.id);
-                }}
-                className="w-full py-4 text-xs font-bold uppercase tracking-wider bg-[var(--color-on-active)] text-[var(--color-paper)] rounded-full hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
-              >
-                 View Case Study
-              </button>
-              
-              {project.liveUrl && (
-                <a 
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()} 
-                  className="w-full py-4 text-xs font-bold uppercase tracking-wider border border-[var(--color-on-active)] text-[var(--color-on-active)] rounded-full flex items-center justify-center hover:bg-[var(--color-on-active)] hover:text-[var(--color-paper)] transition-all cursor-pointer"
-                >
-                  Live Prototype
-                </a>
-              )}
+           {/* Content Body */}
+           <div className="flex-1 p-8 flex flex-col justify-between">
+              <div>
+                 <p className="text-[11px] font-mono uppercase tracking-widest text-[#323840]/40 mb-2">Technical Summary</p>
+                 <p className="text-[13px] text-[#323840] opacity-90 leading-relaxed font-mono line-clamp-5 whitespace-pre-line" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
+                   {project.summary}
+                 </p>
+              </div>
+
+              {/* Action Buttons styled like SVG */}
+              <div className="flex gap-3 mt-4">
+                 <button 
+                   onClick={(e) => {
+                     e.stopPropagation();
+                     onNavigate(project.id);
+                   }}
+                   className="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest bg-[#5479A2] text-white rounded-lg hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-sm"
+                   style={{ fontFamily: 'var(--font-accent)' }}
+                 >
+                    View Project
+                 </button>
+                 
+                 {project.liveUrl && (
+                   <a 
+                     href={project.liveUrl}
+                     target="_blank"
+                     rel="noreferrer"
+                     onClick={(e) => e.stopPropagation()} 
+                     className="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest border-2 border-[#5479A2] text-[#5479A2] rounded-lg flex items-center justify-center hover:bg-[#5479A2] hover:text-white transition-all cursor-pointer"
+                     style={{ fontFamily: 'var(--font-accent)' }}
+                   >
+                     Live Prototype
+                   </a>
+                 )}
+              </div>
            </div>
         </div>
       </div>
@@ -106,9 +123,10 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
       <div className={`mt-2 transition-opacity duration-300 ${isFlipped ? 'opacity-0' : 'opacity-100'}`}>
          <h4 className="text-2xl font-bold text-[var(--color-ink)] mb-1">{project.title}</h4>
          <p className="text-sm font-mono text-[var(--color-ink-subtle)]">{project.tagline}</p>
-      </div>
     </div>
   );
 };
+
+
 
 
