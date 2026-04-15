@@ -15,7 +15,7 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (window.matchMedia('(max-width: 768px)').matches) {
-            setIsInView(entry.isIntersecting);
+          setIsInView(entry.isIntersecting);
         }
       },
       {
@@ -37,84 +37,78 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
   return (
     <div 
       ref={cardRef}
-      className="group relative h-full perspective-1000"
+      className="group relative flex flex-col gap-4 perspective-1000"
     >
       <div 
-        className="relative w-full aspect-square transition-all duration-500 transform-style-3d"
+        className="relative w-full aspect-[4/5] md:aspect-[3/4] transition-all duration-700 transform-style-3d"
         style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         
-        {/* Front Face - Interactive Trigger */}
-        <button
-          onClick={() => setIsFlipped(true)}
-          className="absolute inset-0 w-full h-full p-0 border-0 text-left cursor-pointer backface-hidden rounded-[var(--radius-md)] overflow-hidden shadow-sm bg-[var(--color-paper-static-light)] group-hover:ring-2 group-hover:ring-[#2B6B7C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2B6B7C] transition-all duration-300"
+        {/* Front Face */}
+        <div
+          className="absolute inset-0 w-full h-full backface-hidden rounded-[var(--radius-lg)] md:rounded-[40px] overflow-hidden bg-[var(--color-paper-dim)] border border-[var(--color-ink)]/5 transition-all duration-500"
           aria-hidden={isFlipped}
-          tabIndex={isFlipped ? -1 : 0}
-          aria-label={`View details for ${project.title}`}
         >
           <img 
             src={project.thumbnailUrl} 
-            alt="" 
-            className={`w-full h-full object-cover image-technical ${isInView ? 'in-view' : ''}`}
+            alt={project.title} 
+            className={`w-full h-full object-cover transition-opacity duration-500 ${isInView ? 'opacity-100' : 'opacity-90'}`}
             loading="lazy"
           />
-        </button>
+          
+          {/* Overlay Trigger for Flip */}
+          <button 
+            onClick={() => setIsFlipped(true)}
+            className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors cursor-pointer focus:outline-none"
+            aria-label={`View details for ${project.title}`}
+          />
+        </div>
 
         {/* Back Face */}
         <div 
-          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-md)] bg-[var(--color-paper-dim)] p-6 flex flex-col justify-between shadow-sm border border-[var(--color-paper-dark)]/30 group-hover:ring-2 group-hover:ring-[#2B6B7C] transition-all duration-300 cursor-pointer"
+          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-[40px] bg-[var(--color-ink)] p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 cursor-pointer"
           aria-hidden={!isFlipped}
           onClick={() => setIsFlipped(false)}
         >
-           
-           {/* Header / Metrics */}
            <div className="mt-2">
-              <div className="flex justify-between items-start mb-3">
-                <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-ink-subtle)]">{project.role}</p>
-                <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-ink-subtle)]">{project.duration}</p>
-              </div>
-              <h3 className="text-xl font-bold text-[var(--color-ink)] mb-3 leading-tight">{project.title}</h3>
-              <p className="text-sm text-[var(--color-ink)] leading-relaxed line-clamp-4">{project.summary}</p>
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--color-on-active)] opacity-60 mb-4">{project.tags[0]}</p>
+              <h3 className="text-2xl font-bold text-[var(--color-on-active)] mb-4 leading-tight">{project.title}</h3>
+              <p className="text-sm text-[var(--color-on-active)] opacity-80 leading-relaxed font-mono line-clamp-6">{project.summary}</p>
            </div>
 
-           {/* Actions */}
-           <div className="flex flex-col gap-2 mt-4">
+           <div className="flex flex-col gap-3 mt-4">
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   onNavigate(project.id);
                 }}
-                tabIndex={isFlipped ? 0 : -1}
-                className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] active:scale-95 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2B6B7C]"
+                className="w-full py-4 text-xs font-bold uppercase tracking-wider bg-[var(--color-on-active)] text-[var(--color-paper)] rounded-full hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
               >
-                 Case Study
+                 View Case Study
               </button>
               
-              {project.liveUrl ? (
+              {project.liveUrl && (
                 <a 
                   href={project.liveUrl}
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()} 
-                  tabIndex={isFlipped ? 0 : -1}
-                  className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[#2B6B7C] text-[#2B6B7C] rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[#2B6B7C] hover:text-white active:bg-[#2B6B7C] active:text-white active:scale-95 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2B6B7C]"
+                  className="w-full py-4 text-xs font-bold uppercase tracking-wider border border-[var(--color-on-active)] text-[var(--color-on-active)] rounded-full flex items-center justify-center hover:bg-[var(--color-on-active)] hover:text-[var(--color-paper)] transition-all cursor-pointer"
                 >
-                  Prototype
+                  Live Prototype
                 </a>
-              ) : (
-                <button 
-                  disabled 
-                  tabIndex={-1}
-                  className="w-full py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-paper-dark)] text-[var(--color-ink-subtle)] rounded-[var(--radius-md)] opacity-50 cursor-not-allowed"
-                >
-                  Prototype N/A
-                </button>
               )}
            </div>
         </div>
+      </div>
 
+      {/* Static Info Below Card (Visible at all times like SVG) */}
+      <div className={`mt-2 transition-opacity duration-300 ${isFlipped ? 'opacity-0' : 'opacity-100'}`}>
+         <h4 className="text-2xl font-bold text-[var(--color-ink)] mb-1">{project.title}</h4>
+         <p className="text-sm font-mono text-[var(--color-ink-subtle)]">{project.tagline}</p>
       </div>
     </div>
   );
 };
+
 

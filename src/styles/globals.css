@@ -8,19 +8,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Industrial Clay / Technical Stone Palette (Scientific Low-Strain) */
-  /* Backgrounds: Neutral, matter-like, non-emissive */
-  --color-paper: #E6E5E3; /* Stone Grey - 88% Lightness (Photophobia friendly) */
-  --color-paper-dim: #DAD8D5; /* Darker Clay - Distinct differentiation */
-  --color-paper-dark: #C4C2BF; /* Structural Concrete - High structural contrast */
+  /* Premium Slate Charcoal Palette */
+  /* Backgrounds: Deep, structured, neutral */
+  --color-paper: #323840; 
+  --color-paper-dim: #2A2F37; 
+  --color-paper-dark: #1E2228; 
   
-  /* Typography: Matte, non-vibrating */
-  --color-ink: #1F1F1F; /* Matte Carbon - Pure, soft black */
-  --color-ink-subtle: #5E5C59; /* Technical Graphite */
+  /* Typography: Off-white crisp */
+  --color-ink: #F0F0F0; 
+  --color-ink-subtle: rgba(240, 240, 240, 0.6);
   
-  /* Accents: Engineered Nature */
-  --color-accent: #464C47; /* Deep Industrial Moss */
-  --color-accent-light: #CFCFCF; /* Silver/Aluminum selection */
+  /* Accents: Clean white contrast */
+  --color-accent: #FFFFFF;
+  --color-accent-light: rgba(255, 255, 255, 0.1); 
 
   /* Fonts */
   --font-sans: 'IBM Plex Sans', sans-serif;
@@ -29,34 +29,33 @@
   /* Spacing */
   --spacing-grid: 24px;
 
-  /* Animation - Softer, organic feel */
+  /* Animation */
   --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
   
   /* Shapes */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 12px;
 
   /* Button Text Inverse */
-  --color-on-active: #FFFFFF;
+  --color-on-active: #323840;
   
-  /* Static Light Paper for Image Backgrounds in Dark Mode */
+  /* Static light paper for image backings */
   --color-paper-static-light: #E6E5E3;
 }
 
-/* Dark Mode Overrides */
-.dark {
-  --color-paper: #121212;
-  --color-paper-dim: #1E1E1E;
-  --color-paper-dark: #333333;
-  --color-ink: #E0E0E0;
-  --color-ink-subtle: #A0A0A0;
-  --color-accent: #A0A0A0;
-  --color-accent-light: #333333;
-  
-  /* In Dark Mode, active buttons (white bg) need black text */
-  --color-on-active: #000000;
+/* Reverse Theme for Light Mode */
+:root:not(.dark) {
+  --color-paper: #F0F0F0;
+  --color-paper-dim: #E5E5E5;
+  --color-paper-dark: #D4D4D4;
+  --color-ink: #323840;
+  --color-ink-subtle: rgba(50, 56, 64, 0.6);
+  --color-accent: #323840;
+  --color-accent-light: rgba(50, 56, 64, 0.1);
+  --color-on-active: #F0F0F0;
 }
+
 
 /* Reset & Base */
 body {
@@ -65,13 +64,18 @@ body {
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5; 
+  line-height: 1.5;
   overflow-x: hidden;
   position: relative;
   /* Removed transition to fix mobile lag during theme switch */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 500;
   letter-spacing: -0.02em;
 }
@@ -87,15 +91,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Utility: Soft Borders */
-.border-b-ink { border-bottom: 1px solid var(--color-paper-dark); }
-.border-t-ink { border-top: 1px solid var(--color-paper-dark); }
-.border-l-ink { border-left: 1px solid var(--color-paper-dark); }
-.border-r-ink { border-right: 1px solid var(--color-paper-dark); }
+.border-b-ink {
+  border-bottom: 1px solid var(--color-paper-dark);
+}
+
+.border-t-ink {
+  border-top: 1px solid var(--color-paper-dark);
+}
+
+.border-l-ink {
+  border-left: 1px solid var(--color-paper-dark);
+}
+
+.border-r-ink {
+  border-right: 1px solid var(--color-paper-dark);
+}
 
 /* Interaction: Soft Glow/Shift instead of Invert */
 .hover-soft {
   /* Removed transition to fix mobile lag */
 }
+
 .hover-soft:hover {
   background-color: var(--color-paper-dim);
   color: var(--color-ink);
@@ -103,21 +119,30 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom Scrollbar - Technical/Industrial with Micro Gap */
 ::-webkit-scrollbar {
-  width: 10px; /* Increased width to allow padding/gap */
+  width: 10px;
+  /* Increased width to allow padding/gap */
   height: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
   margin-block: 4px;
 }
+
 ::-webkit-scrollbar-thumb {
-  background-color: #666; /* Slightly darker to sit better on dark bg, but visible */
-  border-radius: 99px; /* Pill shape for smoother floating look */
-  border: 3px solid transparent; /* Creates the gap: 10px width - 3px left - 3px right = 4px visible thumb */
-  background-clip: content-box; /* Clips background to content, leaving border transparent */
+  background-color: #666;
+  /* Slightly darker to sit better on dark bg, but visible */
+  border-radius: 99px;
+  /* Pill shape for smoother floating look */
+  border: 3px solid transparent;
+  /* Creates the gap: 10px width - 3px left - 3px right = 4px visible thumb */
+  background-clip: content-box;
+  /* Clips background to content, leaving border transparent */
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #999; /* Lighter on hover */
+  background-color: #999;
+  /* Lighter on hover */
 }
 
 /* Selection */
@@ -130,6 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -151,7 +177,7 @@ h1, h2, h3, h4, h5, h6 {
 */
 
 /* Reveal color slightly on hover for utility or when in view on mobile */
-.group:hover .image-technical, 
+.group:hover .image-technical,
 .image-technical:hover,
 .image-technical.in-view {
   filter: grayscale(20%) contrast(100%) brightness(100%);
@@ -189,9 +215,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes border-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -206,7 +240,10 @@ h1, h2, h3, h4, h5, h6 {
   .gradient-border-teal::before {
     content: '';
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: -1;
     margin: -2px;
     border-radius: inherit;

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PROJECTS } from '../../constants/siteData';
-import { Mail, Github, Phone, Sun, Moon } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 import { ProjectGridTile } from '../ui/Card';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -10,27 +10,7 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentation }) => {
-  const [copiedId, setCopiedId] = useState<string | null>(null);
   const { theme, toggleTheme } = useTheme();
-
-  const handleCopy = (e: React.MouseEvent, text: string, id: string) => {
-    // Check if desktop (md breakpoint is usually 768px)
-    if (window.matchMedia('(min-width: 768px)').matches) {
-      e.preventDefault();
-      navigator.clipboard.writeText(text);
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
-    }
-  };
-
-  const getFeedbackText = (id: string) => {
-    if (id === 'phone') return 'Phone number copied';
-    if (id === 'email') return 'Email address copied';
-    return 'Copied to clipboard';
-  };
-
-  // Increased size to w-11 h-11 (44px) for accessibility
-  const baseIconBtnStyle = "p-2 rounded-[var(--radius-sm)] border border-[var(--color-paper-dark)]/30 text-[var(--color-ink)] transition-all active:scale-90 flex items-center justify-center w-11 h-11 group hover:bg-[#2B6B7C] hover:text-white hover:border-[#2B6B7C] active:bg-[#2B6B7C] active:text-white active:border-[#2B6B7C]";
 
   return (
     <>
@@ -38,113 +18,78 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentatio
         Skip to content
       </a>
       <main id="main-content" className="min-h-[100dvh] w-full flex flex-col bg-[var(--color-paper)]">
-         {/* Feedback Toast */}
-         {copiedId && (
-           <div className="fixed bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-[var(--color-ink)] text-[var(--color-paper)] text-xs font-mono uppercase tracking-widest rounded-[var(--radius-sm)] shadow-lg z-50 animate-in fade-in slide-in-from-bottom-2 duration-300 pointer-events-none">
-             {getFeedbackText(copiedId)}
-           </div>
-         )}
-  
-         {/* Header */}
-         <div className="flex justify-between items-start px-6 py-6 border-b border-[var(--color-paper-dark)]/10 bg-[var(--color-paper)]">
-            <h1 className="font-mono text-sm font-bold text-[var(--color-ink)] lowercase tracking-tight pt-2">ramanadesign.tech</h1>
-             <div className="flex flex-col items-end gap-3">
-               <div className="flex items-center gap-1.5">
-                 <a 
-                   href="tel:+1234567890" 
-                   className={baseIconBtnStyle} 
-                   aria-label="Phone"
-                   onClick={(e) => handleCopy(e, '+1234567890', 'phone')}
-                 >
-                   <Phone className="w-5 h-5" />
-                 </a>
-                 <a 
-                   href="https://github.com" 
-                   target="_blank" 
-                   rel="noreferrer" 
-                   className={baseIconBtnStyle} 
-                   aria-label="GitHub"
-                 >
-                   <Github className="w-5 h-5" />
-                 </a>
-                 <a 
-                   href="mailto:hello@ramanadesign.tech" 
-                   className={baseIconBtnStyle} 
-                   aria-label="Email"
-                   onClick={(e) => handleCopy(e, 'hello@ramanadesign.tech', 'email')}
-                 >
-                   <Mail className="w-5 h-5" />
-                 </a>
-                 <a 
-                   href="https://linkedin.com" 
-                   target="_blank" 
-                   rel="noreferrer" 
-                   className={baseIconBtnStyle} 
-                   aria-label="LinkedIn"
-                 >
-                   <span className="text-[16px] font-bold leading-none pb-0.5" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>in</span>
-                 </a>
-               </div>
-               
-               {/* Theme Toggle Bar */}
-               <div className="flex items-center gap-1 self-end mt-1">
-                 <button 
-                   onClick={toggleTheme}
-                   className="p-1 rounded-full hover:bg-[var(--color-paper-dark)]/20 cursor-pointer touch-manipulation transition-colors"
-                   aria-label="Switch to light mode"
-                 >
-                   <Sun className="w-4 h-4 text-[var(--color-ink)]" />
-                 </button>
-                 <button
-                   onClick={toggleTheme}
-                   className="w-12 h-12 flex items-center justify-center cursor-pointer group touch-manipulation"
-                   aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                 >
-                   <div className="w-8 h-4 border border-[var(--color-ink)] rounded-[2px] relative flex items-center transition-opacity group-hover:opacity-80">
-                     <div className={`absolute w-2.5 h-2.5 bg-[var(--color-ink)] shadow-sm transition-transform duration-200 ease-out ${theme === 'dark' ? 'translate-x-[18px]' : 'translate-x-[3px]'}`} />
-                   </div>
-                 </button>
-                 <button 
-                   onClick={toggleTheme}
-                   className="p-1 rounded-full hover:bg-[var(--color-paper-dark)]/20 cursor-pointer touch-manipulation transition-colors"
-                   aria-label="Switch to dark mode"
-                 >
-                   <Moon className="w-4 h-4 text-[var(--color-ink)]" />
-                 </button>
-               </div>
-             </div>
-         </div>
-  
-         {/* Hero - Common */}
-         <div className="px-6 pt-12 pb-12 max-w-7xl mx-auto w-full">
-            <div className="md:p-8 gradient-border-teal">
-                <h2 className="text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] mb-6 text-[var(--color-ink)]">Product Design.</h2>
-                <p className="text-xl text-[var(--color-ink-subtle)] leading-relaxed max-w-2xl mb-8">
-                  This portfolio is a product in itself, built to demonstrate technical literacy and systemic thinking.
-                </p>
-                <button 
-                  onClick={onNavigateToDocumentation}
-                  className="w-full md:w-auto px-8 py-3 text-xs font-bold uppercase tracking-wider border border-[var(--color-ink)] text-[var(--color-ink)] rounded-[var(--radius-md)] hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)] hover:text-[var(--color-on-active)] active:bg-[var(--color-ink)] active:border-[var(--color-ink)] active:text-[var(--color-on-active)] active:scale-95 transition-all cursor-pointer flex items-center justify-center"
-                >
-                  case study of this site
-                </button>
+        {/* Header */}
+        <header className="flex justify-between items-center px-6 py-4 border-b border-[var(--color-paper-dark)]/10 bg-[var(--color-paper)] sticky top-0 z-40">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded bg-[var(--color-ink)] flex-shrink-0 flex items-center justify-center overflow-hidden">
+              {/* Branding Placeholder */}
+              <span className="text-[var(--color-paper)] font-bold text-xs">R</span>
             </div>
-         </div>
-  
-         {/* Content Area */}
-         <div className="flex-1 p-6 pb-24 w-full max-w-7xl mx-auto">
-               <h3 className="text-xs font-bold uppercase tracking-widest text-[var(--color-ink)] mb-6 opacity-50">Projects</h3>
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-in slide-in-from-bottom-2 duration-500">
-                  {PROJECTS.map((project) => (
-                     <ProjectGridTile 
-                        key={project.id} 
-                        project={project} 
-                        onNavigate={onNavigate}
-                     />
-                  ))}
-               </div>
-         </div>
+            <div className="flex flex-col">
+              <h1 className="text-sm font-bold tracking-tight uppercase">Ramana</h1>
+              <p className="text-[10px] font-mono text-[var(--color-ink-subtle)] lowercase">ramanadesign.tech</p>
+            </div>
+          </div>
+
+          <div className="hidden md:block">
+            <p className="text-sm font-mono tracking-widest uppercase opacity-80">Design-folio</p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-[var(--color-ink)]/10 transition-colors cursor-pointer"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+          </div>
+        </header>
+
+        {/* Hero - Matching SVG */}
+        <div className="px-6 pt-20 pb-16 max-w-7xl mx-auto w-full">
+          <div className="flex flex-col items-start gap-8">
+            <h2 className="text-6xl md:text-8xl font-bold tracking-tighter leading-none text-[var(--color-ink)] uppercase">
+              Product <br /> Designer.
+            </h2>
+            
+            <div className="space-y-1">
+              <p className="text-lg md:text-xl text-[var(--color-ink)] max-w-2xl font-mono">
+                I design end-to-end products.
+              </p>
+              <p className="text-lg md:text-xl text-[var(--color-ink-subtle)] max-w-2xl font-mono">
+                I'm skilled at handling every stage, from discovery to delivery.
+              </p>
+              <p className="text-lg md:text-xl text-[var(--color-ink-subtle)] max-w-2xl font-mono">
+                Always eager to learn and grow through new work experiences.
+              </p>
+            </div>
+
+            <div className="pt-4">
+              <button
+                onClick={onNavigateToDocumentation}
+                className="px-8 py-3 text-sm font-bold border border-[var(--color-ink)] text-[var(--color-ink)] rounded-full hover:bg-[var(--color-ink)] hover:text-[var(--color-on-active)] active:scale-95 transition-all cursor-pointer"
+              >
+                Contact me
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className="flex-1 p-6 pb-24 w-full max-w-7xl mx-auto">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-[var(--color-ink)] mb-6 opacity-50">Projects</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-in slide-in-from-bottom-2 duration-500">
+            {PROJECTS.map((project) => (
+              <ProjectGridTile
+                key={project.id}
+                project={project}
+                onNavigate={onNavigate}
+              />
+            ))}
+          </div>
+        </div>
       </main>
     </>
   );
-};
+};
