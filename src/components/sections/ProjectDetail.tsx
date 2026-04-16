@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Project } from '../../types';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
+
 
 interface UnifiedProjectDetailProps {
   project: Project;
@@ -8,9 +10,11 @@ interface UnifiedProjectDetailProps {
 }
 
 export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ project, onBack }) => {
+  const { theme } = useTheme();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
 
   return (
     <main className="min-h-[100dvh] w-full max-w-2xl mx-auto border-x border-[var(--color-paper-dark)]/20 shadow-2xl bg-[var(--color-paper)] flex flex-col font-sans overflow-x-hidden">
@@ -56,12 +60,13 @@ export const UnifiedProjectDetail: React.FC<UnifiedProjectDetailProps> = ({ proj
             {/* Hero Image */}
             <div className="w-full aspect-video bg-[var(--color-paper-dim)] rounded-[var(--radius-lg)] md:rounded-[32px] overflow-hidden relative border border-[var(--color-ink)]/5">
               <img
-                src={project.heroUrl}
+                src={theme === 'dark' && project.heroUrlLight ? project.heroUrlLight : project.heroUrl}
                 alt={`${project.title} Hero`}
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 referrerPolicy="no-referrer"
               />
             </div>
+
 
             <section>
               <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-ink)] opacity-40 mb-6 border-b border-[var(--color-ink)]/10 pb-2">System Context</h3>

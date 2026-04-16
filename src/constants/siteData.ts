@@ -2,26 +2,29 @@ import { Project } from '../types';
 
 export const PROJECTS: Project[] = [
   {
-    id: 'smriti',
-    title: 'Smriti',
-    tagline: 'Anonymous memory-sharing platform focusing on emotional resonance.',
-    summary: 'SMRITI: a nostalgia centred social platform built with constraints of post anonymity, privacy, and community safety, under ai supervision',
-    tags: ['UX Research', 'Mobile App', 'Social Impact'],
-    thumbnailUrl: 'https://picsum.photos/800/600?random=1',
-    heroUrl: 'https://picsum.photos/1200/600?random=10',
-    // TODO: Replace with actual project video. Using placeholder to prevent 404.
+    id: 'enlit',
+    title: 'EnLit',
+    tagline: 'Modernizing educational tools with evidence-based learning principles.',
+    summary: 'EnLit, a specialized research-based study portal, focuses on modernizing educational tools by integrating evidence-based learning principles',
+    tags: ['UX Research', 'EdTech', 'Evidence-Based Design'],
+    thumbnailUrl: '/projects/enlit-dark.png', // Shown in light mode
+    thumbnailUrlLight: '/projects/enlit-light.png', // Shown in dark mode
+    heroUrl: '/projects/enlit-dark.png',
+    heroUrlLight: '/projects/enlit-light.png',
+    // ... rest of details
     videoUrlMobile: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
     videoUrlDesktop: 'https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479',
-    liveUrl: 'https://smriti-new.vercel.app/',
-    description: 'Smriti is a digital sanctuary designed for the anonymous sharing of memories. Unlike traditional social media that prioritizes metrics and engagement, Smriti focuses on catharsis and emotional connection through ephemeral, text-first storytelling.',
+    liveUrl: 'https://enlit.world/',
+    description: 'EnLit is a digital learning companion that transforms passive studying into active learning. By leveraging research in cognitive psychology—specifically retrieval practice and spaced repetition—EnLit helps students build long-term retention through a minimalist, distraction-free interface.',
     role: 'Lead Product Designer',
-    duration: '3 Months',
-    challenge: 'Design a social platform that minimizes performance anxiety and toxicity while fostering genuine emotional connection among strangers.',
-    solution: 'A minimalist interface that removes "likes" and public metrics. Interactions are limited to private "resonations" — pre-written empathetic responses. The visual design uses calming gradients and heavy whitespace to reduce cognitive load.',
-    interactionNotes: 'The core interaction is the "Resonate" action. Instead of a quick double-tap (Like), users must hold a button for 1.5 seconds to acknowledge a memory. This "Time-to-Resonate" friction is intentional, ensuring users actually read and process the emotion before reacting.',
-    outcome: 'Usability testing showed a 40% increase in time-spent-reading compared to standard feeds, with qualitative feedback highlighting a sense of safety and reduced anxiety.',
-    accentColor: '#A8C5A8' // Sage Green
+    duration: 'Ongoing',
+    challenge: 'How might we design a study tool that encourages deep focus and scientifically-backed learning habits rather than just rote memorization?',
+    solution: 'A "Clean Slate" interface that prioritizes content and recall over complex hierarchies. Features include adaptive recall timers and interleaved practice sessions, presented through a high-precision typographic design system.',
+    interactionNotes: 'The core navigation uses a "Zen Switch" between Study and Test modes. The transition is smooth and intentional, using CSS blur-filters to reduce visual noise and signal the switch in cognitive state.',
+    outcome: 'Currently in private beta with 200+ active users. Preliminary qualitative feedback indicates a significant reduction in digital fatigue during long study sessions.',
+    accentColor: '#5479A2'
   },
+
   {
     id: 'flavor-filter',
     title: 'Flavor Filter',

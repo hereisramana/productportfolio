@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Project } from '../../types';
+import { useTheme } from '../../hooks/useTheme';
 
 interface ProjectGridTileProps {
   project: Project;
@@ -7,9 +8,11 @@ interface ProjectGridTileProps {
 }
 
 export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNavigate }) => {
+  const { theme } = useTheme();
   const [isFlipped, setIsFlipped] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -50,11 +53,12 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
           aria-hidden={isFlipped}
         >
           <img 
-            src={project.thumbnailUrl} 
+            src={theme === 'dark' && project.thumbnailUrlLight ? project.thumbnailUrlLight : project.thumbnailUrl} 
             alt={project.title} 
             className={`w-full h-full object-cover transition-opacity duration-500 ${isInView ? 'opacity-100' : 'opacity-90'}`}
             loading="lazy"
           />
+
           
           {/* Overlay Trigger for Flip */}
           <button 

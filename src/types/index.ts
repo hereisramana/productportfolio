@@ -5,7 +5,9 @@ export interface Project {
   summary: string;
   tags: string[];
   thumbnailUrl: string;
+  thumbnailUrlLight?: string; // Image to show in dark mode (usually a light-on-transparent version)
   heroUrl: string;
+  heroUrlLight?: string;
   videoUrlMobile?: string;
   videoUrlDesktop?: string;
   liveUrl?: string;
@@ -18,6 +20,7 @@ export interface Project {
   outcome: string;
   accentColor?: string;
 }
+
 
 export type ViewState = 'HOME' | 'PROJECT_DETAIL' | 'DOCUMENTATION';
 
