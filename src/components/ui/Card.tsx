@@ -64,60 +64,61 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
           />
         </div>
 
-        {/* Back Face - Technical Blueprint Look */}
+        {/* Back Face - Refined Technical Sheet */}
         <div 
-          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-[32px] bg-[#D9D9D9] flex flex-col shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-[#323840]/20"
+          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-[40px] bg-[#E0E0E0] flex flex-col shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-[#323840]/10"
           aria-hidden={!isFlipped}
           onClick={() => setIsFlipped(false)}
-          style={{ filter: 'url(#noise-filter)' }}
         >
-           {/* Charcoal Header Block */}
-           <div className="bg-[#323840] px-8 pt-6 pb-4 flex flex-col gap-1 rounded-t-[var(--radius-lg)] md:rounded-t-[32px]">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#5479A2]" />
-                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#F0F0F0] opacity-60">Project metadata // 001</p>
-              </div>
-              <h3 className="text-xl font-bold text-[#F0F0F0] tracking-tight uppercase" style={{ fontFamily: 'var(--font-accent)' }}>{project.title}</h3>
+           {/* Charcoal Header Block - Thinner & Centered like Mockup */}
+           <div className="bg-[#323840] h-[77px] flex items-center justify-center px-6">
+              <h3 className="text-xl font-bold text-[#F0F0F0] tracking-tight uppercase" style={{ fontFamily: 'var(--font-accent)' }}>
+                {project.title}
+              </h3>
            </div>
 
-           {/* Content Body */}
-           <div className="flex-1 p-8 flex flex-col justify-between">
-              <div>
-                 <p className="text-[11px] font-mono uppercase tracking-widest text-[#323840]/40 mb-2">Technical Summary</p>
-                 <p className="text-[13px] text-[#323840] opacity-90 leading-relaxed font-mono line-clamp-5 whitespace-pre-line" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
+           {/* Content Body - Improved Spacing */}
+           <div className="flex-1 p-8 pt-10 flex flex-col justify-between">
+              <div className="space-y-4">
+                 <p className="text-[15px] text-[#323840] leading-relaxed font-medium opacity-90" style={{ fontFamily: 'var(--font-primary)' }}>
                    {project.summary}
                  </p>
               </div>
 
-              {/* Action Buttons styled like SVG */}
-              <div className="flex gap-3 mt-4">
+              {/* Action Buttons styled like Mockup */}
+              <div className="flex gap-4 mt-6">
                  <button 
                    onClick={(e) => {
                      e.stopPropagation();
                      onNavigate(project.id);
                    }}
-                   className="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest bg-[#5479A2] text-white rounded-lg hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-sm"
+                   className="flex-1 py-3.5 text-sm font-bold bg-[#5479A2] text-white rounded-[16px] hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-sm"
                    style={{ fontFamily: 'var(--font-accent)' }}
                  >
-                    View Project
+                    Case Study
                  </button>
                  
-                 {project.liveUrl && (
+                 {project.liveUrl ? (
                    <a 
                      href={project.liveUrl}
                      target="_blank"
                      rel="noreferrer"
                      onClick={(e) => e.stopPropagation()} 
-                     className="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest border-2 border-[#5479A2] text-[#5479A2] rounded-lg flex items-center justify-center hover:bg-[#5479A2] hover:text-white transition-all cursor-pointer"
+                     className="flex-1 py-3.5 text-sm font-bold border-2 border-[#5479A2] text-[#323840] rounded-[16px] flex items-center justify-center hover:bg-[#5479A2]/5 transition-all cursor-pointer"
                      style={{ fontFamily: 'var(--font-accent)' }}
                    >
-                     Live Prototype
+                     Prototype
                    </a>
+                 ) : (
+                    <div className="flex-1 py-3.5 text-sm font-bold border-2 border-[#323840]/20 text-[#323840]/40 rounded-[16px] flex items-center justify-center cursor-not-allowed">
+                      Prototype
+                    </div>
                  )}
               </div>
            </div>
         </div>
       </div>
+
 
       {/* Static Info Below Card (Visible at all times like SVG) */}
       <div className={`mt-2 transition-opacity duration-300 ${isFlipped ? 'opacity-0' : 'opacity-100'}`}>
