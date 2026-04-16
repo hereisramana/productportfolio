@@ -5,6 +5,7 @@ import { UnifiedProjectDetail } from './components/sections/ProjectDetail';
 import { Documentation } from './components/sections/Documentation';
 import { Layout } from './components/layout/Layout';
 import { useHistoryRouter } from './hooks/useHistoryRouter';
+import { ThemeProvider } from './context/ThemeContext';
 
 export const App: React.FC = () => {
   const { view, selectedProjectId, navigateToProject, navigateToDocumentation, goBack } = useHistoryRouter();
@@ -13,33 +14,38 @@ export const App: React.FC = () => {
 
   // --- RENDERING ---
 
-  if (view === 'PROJECT_DETAIL' && currentProject) {
-      return (
-        <Layout>
-            <UnifiedProjectDetail 
-                project={currentProject} 
-                onBack={goBack} 
-            />
-        </Layout>
-      );
-  }
+  const renderView = () => {
+    if (view === 'PROJECT_DETAIL' && currentProject) {
+        return (
+          <UnifiedProjectDetail 
+              project={currentProject} 
+              onBack={goBack} 
+          />
+        );
+    }
 
-  if (view === 'DOCUMENTATION') {
-      return (
-        <Layout>
-            <Documentation 
-                onBack={goBack} 
-            />
-        </Layout>
-      );
-  }
+    if (view === 'DOCUMENTATION') {
+        return (
+          <Documentation 
+              onBack={goBack} 
+          />
+        );
+    }
+
+    return (
+      <Home 
+          onNavigate={navigateToProject} 
+          onNavigateToDocumentation={navigateToDocumentation}
+      />
+    );
+  };
 
   return (
-    <Layout>
-        <Home 
-            onNavigate={navigateToProject} 
-            onNavigateToDocumentation={navigateToDocumentation}
-        />
-    </Layout>
+    <ThemeProvider>
+      <Layout>
+        {renderView()}
+      </Layout>
+    </ThemeProvider>
   );
 };
+
