@@ -49,7 +49,7 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
         
         {/* Front Face */}
         <div
-          className="absolute inset-0 w-full h-full backface-hidden rounded-[var(--radius-lg)] md:rounded-t-[40px] overflow-hidden bg-[var(--color-paper-dim)] border border-[var(--color-ink)]/5 transition-all duration-500"
+          className="absolute inset-0 w-full h-full backface-hidden rounded-[var(--radius-lg)] md:rounded-t-[40px] rounded-b-none overflow-hidden bg-[var(--color-paper-dim)] border border-[var(--color-ink)]/5 transition-all duration-500"
           aria-hidden={isFlipped}
         >
           <img 
@@ -70,7 +70,7 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
 
         {/* Back Face - Refined Technical Sheet */}
         <div 
-          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-t-[40px] bg-[#E0E0E0] flex flex-col shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-[#323840]/10"
+          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-t-[40px] bg-[#E0E0E0] rounded-b-none flex flex-col shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-[#323840]/10"
           aria-hidden={!isFlipped}
           onClick={() => setIsFlipped(false)}
         >
