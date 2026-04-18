@@ -7,8 +7,8 @@ export const PROJECTS: Project[] = [
     tagline: 'Modernizing educational tools with evidence-based learning principles.',
     summary: 'EnLit, a specialized research-based study portal, focuses on modernizing educational tools by integrating evidence-based learning principles',
     tags: ['UX Research', 'EdTech', 'Evidence-Based Design'],
-    thumbnailUrl: '/projects/enlit-dark.png', // Shown in light mode
-    thumbnailUrlLight: '/projects/enlit-light.png', // Shown in dark mode
+    thumbnailUrl: '/projects/ENLIT THUMB LIGHT.svg', // Shown in light mode
+    thumbnailUrlLight: '/projects\ENLIT THUMB DARK.svg"', // Shown in dark mode
     heroUrl: '/projects/enlit-dark.png',
     heroUrlLight: '/projects/enlit-light.png',
     // ... rest of details
