@@ -49,7 +49,7 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
         
         {/* Front Face */}
         <div
-          className="absolute inset-0 w-full h-full backface-hidden rounded-[var(--radius-lg)] md:rounded-[40px] overflow-hidden bg-[var(--color-paper-dim)] border border-[var(--color-ink)]/5 transition-all duration-500"
+          className="absolute inset-0 w-full h-full backface-hidden rounded-[var(--radius-lg)] md:rounded-t-[40px] overflow-hidden bg-[var(--color-paper-dim)] border border-[var(--color-ink)]/5 transition-all duration-500"
           aria-hidden={isFlipped}
         >
           <img 
@@ -70,12 +70,12 @@ export const ProjectGridTile: React.FC<ProjectGridTileProps> = ({ project, onNav
 
         {/* Back Face - Refined Technical Sheet */}
         <div 
-          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-[40px] bg-[#E0E0E0] flex flex-col shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-[#323840]/10"
+          className="absolute inset-0 backface-hidden rotate-y-180 rounded-[var(--radius-lg)] md:rounded-t-[40px] bg-[#E0E0E0] flex flex-col shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-[#323840]/10"
           aria-hidden={!isFlipped}
           onClick={() => setIsFlipped(false)}
         >
            {/* Charcoal Header Block - Thinner & Centered like Mockup */}
-           <div className="bg-[#323840] h-[77px] flex items-center justify-center px-6">
+           <div className="bg-[#323840] h-[96px] flex items-center justify-center px-6">
               <h3 className="text-xl font-bold text-[#F0F0F0] tracking-tight uppercase" style={{ fontFamily: 'var(--font-accent)' }}>
                 {project.title}
               </h3>
