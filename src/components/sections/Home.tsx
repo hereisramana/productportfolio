@@ -69,24 +69,22 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentatio
 
         {/* Hero - Montserrat & Chivo Mono */}
         <div className="px-6 pt-24 pb-20 max-w-7xl mx-auto w-full">
-          <div className="flex flex-col items-start gap-10">
-            <h2 className="text-[64px] font-bold tracking-tighter leading-tight text-[var(--color-ink)] uppercase" style={{ fontFamily: 'var(--font-accent)' }}>
-              Product Designer.
-            </h2>
-            
-            <div className="space-y-2">
-              <p className="text-[18px] text-[var(--color-ink)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
-                I design end-to-end products.
-              </p>
-              <p className="text-[18px] text-[var(--color-ink-subtle)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
-                I'm skilled at handling every stage, from discovery to delivery.
-              </p>
-              <p className="text-[18px] text-[var(--color-ink-subtle)] max-w-2xl" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
-                Always eager to learn and grow through new work experiences.
-              </p>
-            </div>
-
-
+          <div className="flex flex-col items-start gap-8">
+        <div className="flex items-center gap-3 mb-[-12px]">
+      <span className="w-2 h-2 rounded-full bg-[var(--clr-focus)] animate-pulse"></span>
+      <span className="text-[13px] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
+        System Status: Active
+      </span>
+    </div>
+            <h2 className="text-[64px] md:text-[84px] font-extrabold tracking-[0.02em] leading-[0.95] text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-accent)' }}>
+      Product <br className="hidden md:block" />
+      Designer<span className="text-[var(--clr-focus)]">.</span>
+    </h2>            
+            <div className="mt-2 max-w-2xl border-l-2 border-[var(--color-border-subtle)] pl-6 py-2">
+      <p className="text-[18px] leading-[1.6] text-[var(--color-text-primary)]" style={{ fontFamily: 'var(--font-mono-chivo)' }}>
+        Bridging design-led architecture with AI-assisted development. I orchestrate the entire product lifecycle—from high-fidelity wireframing to engineering robust, agent-driven workflows.
+      </p>
+    </div>
             <div className="pt-6">
               <button
                 onClick={onNavigateToDocumentation}
@@ -125,4 +123,4 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onNavigateToDocumentatio
     </>
   );
 };
-
+
